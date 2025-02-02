@@ -1,6 +1,7 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp, writeBatch, doc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -100,20 +101,27 @@ async function bestellungAbschließen() {
         }
     }
 
+    if (bestellungen.length === 0) {
+        alert('Bitte wähle mindestens ein Getränk aus.');
+        modalSchließen();
+        return;
+    }
+
     try {
-        // Schreiboperationen batchen
         const batch = writeBatch(db);
+
         bestellungen.forEach((bestellung) => {
             const docRef = doc(collection(db, 'bestellungen'));
             batch.set(docRef, bestellung);
         });
+
         await batch.commit();
 
         alert('Bestellung erfolgreich aufgegeben!');
         document.getElementById('bestellformular').reset();
         modalSchließen();
     } catch (error) {
-        console.error('Fehler beim Aufgeben der Bestellung: ', error);
+        console.error('Fehler beim Aufgeben der Bestellung:', error);
         alert('Es gab ein Problem mit deiner Bestellung. Bitte versuche es erneut.');
     }
 }

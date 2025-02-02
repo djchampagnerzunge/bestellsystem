@@ -39,6 +39,12 @@ input, select {
     margin-top: 15px;
 }
 
+.getränk span {
+    flex: 1;
+    text-align: left;
+}
+
+
 .menge-steuerung {
     display: flex;
     align-items: center;
@@ -47,21 +53,33 @@ input, select {
 .menge-steuerung button {
     width: 30px;
     height: 30px;
-    font-size: 18px;
+    font-size: 20px;
     background-color: #4CAF50;
     color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
 }
+
 
 .menge-steuerung input {
     width: 40px;
     text-align: center;
     border: none;
-    background: none;
+    background: transparent;
     font-size: 16px;
+    padding: 0;
+    margin: 0 5px;
+    outline: none;
+    -moz-appearance: textfield; /* Entfernt Pfeile in Firefox */
+    -webkit-appearance: none; /* Entfernt Pfeile in Chrome */
 }
+
 
 button[type="button"] {
     width: 100%;
