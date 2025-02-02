@@ -13,21 +13,49 @@
         <input type="text" id="name" name="name" required>
         
         <label for="tischnummer">Tischnummer:</label>
-        <input type="number" id="tischnummer" name="tischnummer" required>
-        
-        <label for="getränk">Getränk:</label>
-        <select id="getränk" name="getränk">
-            <option value="Wasser" data-preis="1.00">Wasser - €1.00</option>
-            <option value="Cola" data-preis="2.50">Cola - €2.50</option>
-            <option value="Bier" data-preis="3.00">Bier - €3.00</option>
-            <!-- Weitere Getränke hier hinzufügen -->
+        <select id="tischnummer" name="tischnummer" required>
+            <option value="" disabled selected>Wähle die Tischnummer</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <!-- Weitere Tischoptionen hinzufügen -->
         </select>
         
-        <label for="menge">Menge:</label>
-        <input type="number" id="menge" name="menge" min="1" required>
-        
-        <button type="submit">Bestellen</button>
+        <div id="getränkeliste">
+            <label>Getränke:</label>
+            <div class="getränk">
+                <span>Wasser - €1.00</span>
+                <button type="button" onclick="anpassen('wasser', -1)">-</button>
+                <input type="number" id="wasser" name="wasser" value="0" readonly>
+                <button type="button" onclick="anpassen('wasser', 1)">+</button>
+            </div>
+            <div class="getränk">
+                <span>Cola - €2.50</span>
+                <button type="button" onclick="anpassen('cola', -1)">-</button>
+                <input type="number" id="cola" name="cola" value="0" readonly>
+                <button type="button" onclick="anpassen('cola', 1)">+</button>
+            </div>
+            <div class="getränk">
+                <span>Bier - €3.00</span>
+                <button type="button" onclick="anpassen('bier', -1)">-</button>
+                <input type="number" id="bier" name="bier" value="0" readonly>
+                <button type="button" onclick="anpassen('bier', 1)">+</button>
+            </div>
+            <!-- Weitere Getränke hier hinzufügen -->
+        </div>
+
+        <button type="button" onclick="zumWarenkorb()">Zum Warenkorb</button>
     </form>
+
+    <div id="warenkorbModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="modalSchließen()">&times;</span>
+            <h2>Warenkorb</h2>
+            <ul id="warenkorbListe"></ul>
+            <p id="gesamtbetrag"></p>
+            <button type="button" onclick="bestellungAbschließen()">Bestellung abschließen</button>
+        </div>
+    </div>
 
     <script type="module" src="app.js"></script>
 </body>

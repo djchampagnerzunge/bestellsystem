@@ -1,6 +1,6 @@
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
-import { getFirestore, collection, addDoc, query, where, getDocs, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -17,30 +17,76 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-document.getElementById('bestellformular').addEventListener('submit', async function (e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const tischnummer = document.getElementById('tischnummer').value;
-    const getränkSelect = document.getElementById('getränk');
-    const getränk = getränkSelect.value;
-    const preis = parseFloat(getränkSelect.options[getränkSelect.selectedIndex].getAttribute('data-preis'));
-    const menge = parseInt(document.getElementById('menge').value, 10);
-    const gesamtpreis = preis * menge;
+const getränkePreise = {
+  wasser: 1.00,
+  cola: 2.50,
+  bier: 3.00
+  // Weitere Getränke hier hinzufügen
+};
 
-    try {
-        await addDoc(collection(db, 'bestellungen'), {
-            name: name,
-            tischnummer: tischnummer,
-            getränk: getränk,
-            menge: menge,
-            preis: gesamtpreis,
-            status: 'eingegangen',
-            timestamp: serverTimestamp()
-        });
-        alert('Bestellung erfolgreich aufgegeben!');
-        document.getElementById('bestellformular').reset();
-    } catch (error) {
-        console.error('Fehler beim Aufgeben der Bestellung: ', error);
+function anpassen(id, wert) {
+  const input = document.getElementById(id);
+  const neueMenge = parseInt(input.value) + wert;
+  if (neueMenge >= 0) {
+    input.value = neueMenge;
+  }
+}
+
+function zumWarenkorb() {
+  const warenkorbListe = document.getElementById('warenkorbListe');
+  const gesamtbetragElement = document.getElementById('gesamtbetrag');
+  let gesamtbetrag = 0;
+  warenkorbListe.innerHTML = '';
+
+  for (const getränk in getränkePreise) {
+    const menge = parseInt(document.getElementById(getränk).value);
+    if (menge > 0) {
+      const preis = getränkePreise[getränk] * menge;
+      gesamtbetrag += preis;
+
+      const li = document.createElement('li');
+      li.textContent = `${getränk} - ${menge} x €${getränkePreise[getränk].toFixed(2)} = €${preis.toFixed(2)}`;
+      warenkorbListe.appendChild(li);
     }
-});
+  }
+  gesamtbetragElement.textContent = `Gesamtbetrag: €${gesamtbetrag.toFixed(2)}`;
+
+  // Modal anzeigen
+  const modal = document.getElementById('warenkorbModal');
+  modal.style.display = 'block';
+}
+
+function modalSchließen() {
+  const modal = document.getElementById('warenkorbModal');
+  modal.style.display = 'none';
+}
+
+document.getElementById('bestellformular').addEventListener('submit', async function (e) {
+  e.preventDefault();
+  
+  const name = document.getElementById('name').value;
+  const tischnummer = document.getElementById('tischnummer').value;
+
+  for (const getränk in getränkePreise) {
+    const menge = parseInt(document.getElementById(getränk).value);
+    if (menge > 0) {
+      const preis = getränkePreise[getränk] * menge;
+
+      try {
+        await addDoc(collection(db, 'bestellungen'), {
+          name: name,
+          tischnummer: tischnummer,
+          getränk: getränk,
+          menge: menge,
+          preis: preis,
+          status: 'eingegangen',
+          timestamp: serverTimestamp()
+        });
+      } catch (error) {
+        console.error('Fehler beim Aufgeben der Bestellung: ', error);
+      }
+    }
+  }
+
+  alert('Bestellung erfolgreich aufgegeben!');
+  document.getElementById('bestellformular').[_{{{CITATION{{{_1{](https://github.com/primefaces/primereact/tree/4a676c58deb4e90977744cf5bb4600c02cee1f63/src%2Fshowcase%2Fliveeditor%2FLiveEditor.js)[_{{{CITATION{{{_2{](https://github.com/xandrman/bitrix-bootstrap-template/tree/5a36588688dc78ea78864e933f45e0e3c13be74a/header.php)[_{{{CITATION{{{_3{](https://github.com/hd-code/pandoc-docker/tree/07f83c6deeafbff1710c5f7992a97955c298ad61/example%2Fexample.md)[_{{{CITATION{{{_4{](https://github.com/AndreasHeine/opcua-sub-to-websocket/tree/b272dca8c8abf371e5e35f05ce93949bdb775723/README.md)
