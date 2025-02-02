@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getränkebestellung</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Getränkebestellung</h1>
+    <form id="bestellformular">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+        
+        <label for="tischnummer">Tischnummer:</label>
+        <input type="number" id="tischnummer" name="tischnummer" required>
+        
+        <label for="getränk">Getränk:</label>
+        <select id="getränk" name="getränk">
+            <option value="Wasser" data-preis="1.00">Wasser - €1.00</option>
+            <option value="Cola" data-preis="2.50">Cola - €2.50</option>
+            <option value="Bier" data-preis="3.00">Bier - €3.00</option>
+            <!-- Weitere Getränke hier hinzufügen -->
+        </select>
+        
+        <label for="menge">Menge:</label>
+        <input type="number" id="menge" name="menge" min="1" required>
+        
+        <button type="submit">Bestellen</button>
+    </form>
+
+    <script type="module" src="app.js"></script>
+</body>
+</html>
