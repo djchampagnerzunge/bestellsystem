@@ -21,9 +21,6 @@ const zusammenfassung = document.getElementById('zusammenfassung');
 
 const q = query(
     collection(db, 'bestellungen'),
-    orderBy('tischnummer'),
-    orderBy('nachname'),
-    orderBy('vorname'),
     orderBy('timestamp')
 );
 
@@ -44,14 +41,17 @@ onSnapshot(q, (snapshot) => {
         `;
         bestellliste.appendChild(li);
 
-        if (!bestellungen[bestellung.name]) {
-            bestellungen[bestellung.name] = { gesamt: 0, tische: {} };
+        // Kombiniere Vorname und Nachname zu einem Schlüssel
+        const kundeName = `${bestellung.vorname} ${bestellung.nachname}`;
+
+        if (!bestellungen[kundeName]) {
+            bestellungen[kundeName] = { gesamt: 0, tische: {} };
         }
-        bestellungen[bestellung.name].gesamt += bestellung.preis;
-        if (!bestellungen[bestellung.name].tische[bestellung.tischnummer]) {
-            bestellungen[bestellung.name].tische[bestellung.tischnummer] = 0;
+        bestellungen[kundeName].gesamt += bestellung.preis;
+        if (!bestellungen[kundeName].tische[bestellung.tischnummer]) {
+            bestellungen[kundeName].tische[bestellung.tischnummer] = 0;
         }
-        bestellungen[bestellung.name].tische[bestellung.tischnummer] += bestellung.preis;
+        bestellungen[kundeName].tische[bestellung.tischnummer] += bestellung.preis;
     });
 
     zusammenfassung.innerHTML = '<h2>Zusammenfassung der Bestellungen</h2>';
@@ -61,6 +61,7 @@ onSnapshot(q, (snapshot) => {
         zusammenfassung.appendChild(p);
     }
 });
+
 
 window.updateStatus = async function (id, status) {
     try {

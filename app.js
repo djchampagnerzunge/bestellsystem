@@ -27,12 +27,17 @@ const getränkePreise = {
 
 function anpassen(id, wert) {
     const input = document.getElementById(id);
+    if (!input) {
+        console.error(`Element mit ID '${id}' nicht gefunden.`);
+        return;
+    }
     let neueMenge = parseInt(input.value) + wert;
     if (neueMenge < 0) neueMenge = 0;
     input.value = neueMenge;
 }
 
 window.anpassen = anpassen; // Macht die Funktion global verfügbar
+
 
 function zumWarenkorb() {
     const warenkorbListe = document.getElementById('warenkorbListe');

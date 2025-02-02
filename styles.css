@@ -44,7 +44,6 @@ input, select {
     text-align: left;
 }
 
-
 .menge-steuerung {
     display: flex;
     align-items: center;
@@ -67,11 +66,13 @@ input, select {
     line-height: 1;
 }
 
-
+.menge-steuerung button:hover {
+    background-color: #45a049;
+}
 
 .menge-steuerung input {
     width: 40px;
-	height: 30px;
+    height: 30px;
     text-align: center;
     border: none;
     background: transparent;
@@ -83,8 +84,8 @@ input, select {
     -webkit-appearance: none; /* Entfernt Pfeile in Chrome */
 }
 
-
-button[type="button"] {
+/* Styles für die großen Buttons */
+.großer-button {
     width: 100%;
     padding: 15px;
     margin-top: 20px;
@@ -96,7 +97,7 @@ button[type="button"] {
     cursor: pointer;
 }
 
-button[type="button"]:hover {
+.großer-button:hover {
     background-color: #45a049;
 }
 
@@ -127,7 +128,6 @@ button[type="button"]:hover {
     background-color: #4CAF50;
     color: white;
 }
-
 
 .modal {
     display: none;
