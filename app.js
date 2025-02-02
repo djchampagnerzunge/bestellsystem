@@ -74,15 +74,33 @@ function modalSchließen() {
 window.modalSchließen = modalSchließen;
 
 async function bestellungAbschließen() {
-    const vorname = document.getElementById('vorname').value;
-    const nachname = document.getElementById('nachname').value;
-    const tischnummer = document.getElementById('tischnummer').value;
+    const vornameElement = document.getElementById('vorname');
+    const nachnameElement = document.getElementById('nachname');
+    const tischnummerElement = document.getElementById('tischnummer');
 
-    if (!vorname || !nachname || !tischnummer) {
-        alert('Bitte gib deinen Vornamen, Nachnamen und die Tischnummer an.');
+    console.log('Vorname Element:', vornameElement);
+    console.log('Nachname Element:', nachnameElement);
+    console.log('Tischnummer Element:', tischnummerElement);
+
+    if (!vornameElement || !nachnameElement || !tischnummerElement) {
+        alert('Eines oder mehrere der erforderlichen Elemente wurden nicht gefunden.');
         modalSchließen();
         return;
     }
+
+    const vorname = vornameElement.value;
+    const nachname = nachnameElement.value;
+    const tischnummer = tischnummerElement.value;
+
+    if (!vorname || !nachname || !tischnummer) {
+        alert('Bitte gib deinen Vor- und Nachnamen sowie die Tischnummer an.');
+        modalSchließen();
+        return;
+    }
+
+
+}
+
 
     const bestellungen = [];
     for (const getränk in getränkePreise) {
