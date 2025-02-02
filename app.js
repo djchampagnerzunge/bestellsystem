@@ -99,40 +99,39 @@ async function bestellungAbschließen() {
         return;
     }
 
-    const bestellungen = [];
+    const getränkeListe = [];
+    let gesamtpreis = 0;
+
     for (const getränk in getränkePreise) {
         const menge = parseInt(document.getElementById(getränk).value);
         if (menge > 0) {
             const preis = getränkePreise[getränk] * menge;
+            gesamtpreis += preis;
 
-            bestellungen.push({
-                vorname: vorname,
-                nachname: nachname,
-                tischnummer: tischnummer,
+            getränkeListe.push({
                 getränk: getränk,
                 menge: menge,
-                preis: preis,
-                status: 'eingegangen',
-                timestamp: serverTimestamp()
+                preis: preis
             });
         }
     }
 
-    if (bestellungen.length === 0) {
+    if (getränkeListe.length === 0) {
         alert('Bitte wähle mindestens ein Getränk aus.');
         modalSchließen();
         return;
     }
 
     try {
-        const batch = writeBatch(db);
-
-        bestellungen.forEach((bestellung) => {
-            const docRef = doc(collection(db, 'bestellungen'));
-            batch.set(docRef, bestellung);
+        await addDoc(collection(db, 'bestellungen'), {
+            vorname: vorname,
+            nachname: nachname,
+            tischnummer: tischnummer,
+            getränke: getränkeListe,
+            gesamtpreis: gesamtpreis,
+            status: 'eingegangen',
+            timestamp: serverTimestamp()
         });
-
-        await batch.commit();
 
         alert('Bestellung erfolgreich aufgegeben!');
         document.getElementById('bestellformular').reset();
@@ -144,4 +143,5 @@ async function bestellungAbschließen() {
 }
 
 window.bestellungAbschließen = bestellungAbschließen;
+
 

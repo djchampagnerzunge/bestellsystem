@@ -12,7 +12,7 @@ const firebaseConfig = {
   measurementId: "G-4L916X16F7"
 };
 
-// Initialize Firebase
+// Firebase initialisieren (Firebase-Konfiguration einfügen)
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -21,47 +21,87 @@ const zusammenfassung = document.getElementById('zusammenfassung');
 
 const q = query(
     collection(db, 'bestellungen'),
+    orderBy('tischnummer'),
     orderBy('timestamp')
 );
 
 onSnapshot(q, (snapshot) => {
     bestellliste.innerHTML = '';
-    const bestellungen = {};
+    zusammenfassung.innerHTML = '';
+
+    const zusammenfassungen = {}; // Für die Gesamtsummen pro Gast
+
     snapshot.forEach((doc) => {
         const bestellung = doc.data();
         const li = document.createElement('li');
         li.id = `bestellung-${doc.id}`;
+
+        // Getränke anzeigen (ohne Preise)
+        let getränkeHTML = '';
+        bestellung.getränke.forEach((item) => {
+            getränkeHTML += `${item.getränk.charAt(0).toUpperCase() + item.getränk.slice(1)} x${item.menge}<br>`;
+        });
+
         li.innerHTML = `
-            Tisch: ${bestellung.tischnummer} <br>
-            Name: ${bestellung.vorname} ${bestellung.nachname} <br>
-            Getränk: ${bestellung.getränk}, Menge: ${bestellung.menge}, Preis: €${bestellung.preis.toFixed(2)}, Status: ${bestellung.status}
+            <strong>Tisch:</strong> ${bestellung.tischnummer}<br>
+            <strong>Name:</strong> ${bestellung.vorname} ${bestellung.nachname}<br>
+            <strong>Getränke:</strong><br>
+            ${getränkeHTML}
+            <strong>Status:</strong> ${bestellung.status}
             <br>
             <button onclick="updateStatus('${doc.id}', 'in Bearbeitung')">In Bearbeitung</button>
             <button onclick="updateStatus('${doc.id}', 'serviert')">Serviert</button>
         `;
         bestellliste.appendChild(li);
 
-        // Kombiniere Vorname und Nachname zu einem Schlüssel
+        // Zusammenfassung vorbereiten
         const kundeName = `${bestellung.vorname} ${bestellung.nachname}`;
+        if (!zusammenfassungen[kundeName]) {
+            zusammenfassungen[kundeName] = {
+                tischnummer: bestellung.tischnummer,
+                gesamtpreis: 0,
+                getränkeDetails: []
+            };
+        }
 
-        if (!bestellungen[kundeName]) {
-            bestellungen[kundeName] = { gesamt: 0, tische: {} };
-        }
-        bestellungen[kundeName].gesamt += bestellung.preis;
-        if (!bestellungen[kundeName].tische[bestellung.tischnummer]) {
-            bestellungen[kundeName].tische[bestellung.tischnummer] = 0;
-        }
-        bestellungen[kundeName].tische[bestellung.tischnummer] += bestellung.preis;
+        zusammenfassungen[kundeName].gesamtpreis += bestellung.gesamtpreis;
+
+        // Getränke mit Preisen hinzufügen
+        bestellung.getränke.forEach((item) => {
+            zusammenfassungen[kundeName].getränkeDetails.push({
+                getränk: item.getränk,
+                menge: item.menge,
+                preis: item.preis
+            });
+        });
     });
 
-    zusammenfassung.innerHTML = '<h2>Zusammenfassung der Bestellungen</h2>';
-    for (const name in bestellungen) {
-        const p = document.createElement('p');
-        p.innerHTML = `${name} - Gesamtsumme: €${bestellungen[name].gesamt.toFixed(2)}<br> Tische: ${JSON.stringify(bestellungen[name].tische)}`;
-        zusammenfassung.appendChild(p);
+    // Zusammenfassung der Bestellungen pro Gast
+    const summaryTitle = document.createElement('h2');
+    summaryTitle.textContent = 'Zusammenfassung der Bestellungen';
+    zusammenfassung.appendChild(summaryTitle);
+
+    for (const kunde in zusammenfassungen) {
+        const kundeData = zusammenfassungen[kunde];
+        const div = document.createElement('div');
+        div.classList.add('kunde-zusammenfassung');
+
+        let getränkeDetailsHTML = '';
+        kundeData.getränkeDetails.forEach((item) => {
+            getränkeDetailsHTML += `${item.getränk.charAt(0).toUpperCase() + item.getränk.slice(1)} x${item.menge} - €${item.preis.toFixed(2)}<br>`;
+        });
+
+        div.innerHTML = `
+            <strong>Name:</strong> ${kunde} <br>
+            <strong>Tischnummer:</strong> ${kundeData.tischnummer} <br>
+            <strong>Getränke:</strong><br>
+            ${getränkeDetailsHTML}
+            <strong>Gesamtbetrag:</strong> €${kundeData.gesamtpreis.toFixed(2)}
+            <hr>
+        `;
+        zusammenfassung.appendChild(div);
     }
 });
-
 
 window.updateStatus = async function (id, status) {
     try {
