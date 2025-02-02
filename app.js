@@ -74,23 +74,9 @@ function modalSchließen() {
 window.modalSchließen = modalSchließen;
 
 async function bestellungAbschließen() {
-    const vornameElement = document.getElementById('vorname');
-    const nachnameElement = document.getElementById('nachname');
-    const tischnummerElement = document.getElementById('tischnummer');
-
-    console.log('Vorname Element:', vornameElement);
-    console.log('Nachname Element:', nachnameElement);
-    console.log('Tischnummer Element:', tischnummerElement);
-
-    if (!vornameElement || !nachnameElement || !tischnummerElement) {
-        alert('Eines oder mehrere der erforderlichen Elemente wurden nicht gefunden.');
-        modalSchließen();
-        return;
-    }
-
-    const vorname = vornameElement.value;
-    const nachname = nachnameElement.value;
-    const tischnummer = tischnummerElement.value;
+    const vorname = document.getElementById('vorname');
+    const nachname = document.getElementById('nachname');
+    const tischnummer = document.getElementById('tischnummer');
 
     if (!vorname || !nachname || !tischnummer) {
         alert('Bitte gib deinen Vor- und Nachnamen sowie die Tischnummer an.');
