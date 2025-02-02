@@ -25,21 +25,27 @@
             <label>Getränke:</label>
             <div class="getränk">
                 <span>Wasser - €1.00</span>
-                <button type="button" onclick="anpassen('wasser', -1)">-</button>
-                <input type="number" id="wasser" name="wasser" value="0" readonly>
-                <button type="button" onclick="anpassen('wasser', 1)">+</button>
+				<div class="menge-steuerung">
+					<button type="button" onclick="anpassen('wasser', -1)">-</button>
+					<input type="number" id="wasser" name="wasser" value="0" readonly>
+					<button type="button" onclick="anpassen('wasser', 1)">+</button>
+				</div>	
             </div>
             <div class="getränk">
                 <span>Cola - €2.50</span>
-                <button type="button" onclick="anpassen('cola', -1)">-</button>
-                <input type="number" id="cola" name="cola" value="0" readonly>
-                <button type="button" onclick="anpassen('cola', 1)">+</button>
+				<div class="menge-steuerung">
+					<button type="button" onclick="anpassen('cola', -1)">-</button>
+					<input type="number" id="cola" name="cola" value="0" readonly>
+					<button type="button" onclick="anpassen('cola', 1)">+</button>
+				</div>	
             </div>
             <div class="getränk">
                 <span>Bier - €3.00</span>
-                <button type="button" onclick="anpassen('bier', -1)">-</button>
-                <input type="number" id="bier" name="bier" value="0" readonly>
-                <button type="button" onclick="anpassen('bier', 1)">+</button>
+				<div class="menge-steuerung">
+					<button type="button" onclick="anpassen('bier', -1)">-</button>
+					<input type="number" id="bier" name="bier" value="0" readonly>
+					<button type="button" onclick="anpassen('bier', 1)">+</button>
+				</div>	
             </div>
             <!-- Weitere Getränke hier hinzufügen -->
         </div>

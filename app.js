@@ -25,68 +25,97 @@ const getränkePreise = {
 };
 
 function anpassen(id, wert) {
-  const input = document.getElementById(id);
-  const neueMenge = parseInt(input.value) + wert;
-  if (neueMenge >= 0) {
+    const input = document.getElementById(id);
+    let neueMenge = parseInt(input.value) + wert;
+    if (neueMenge < 0) neueMenge = 0;
     input.value = neueMenge;
-  }
 }
+
+window.anpassen = anpassen; // Macht die Funktion global verfügbar
 
 function zumWarenkorb() {
-  const warenkorbListe = document.getElementById('warenkorbListe');
-  const gesamtbetragElement = document.getElementById('gesamtbetrag');
-  let gesamtbetrag = 0;
-  warenkorbListe.innerHTML = '';
+    const warenkorbListe = document.getElementById('warenkorbListe');
+    const gesamtbetragElement = document.getElementById('gesamtbetrag');
+    let gesamtbetrag = 0;
+    warenkorbListe.innerHTML = '';
 
-  for (const getränk in getränkePreise) {
-    const menge = parseInt(document.getElementById(getränk).value);
-    if (menge > 0) {
-      const preis = getränkePreise[getränk] * menge;
-      gesamtbetrag += preis;
+    for (const getränk in getränkePreise) {
+        const menge = parseInt(document.getElementById(getränk).value);
+        if (menge > 0) {
+            const preis = getränkePreise[getränk] * menge;
+            gesamtbetrag += preis;
 
-      const li = document.createElement('li');
-      li.textContent = `${getränk} - ${menge} x €${getränkePreise[getränk].toFixed(2)} = €${preis.toFixed(2)}`;
-      warenkorbListe.appendChild(li);
+            const li = document.createElement('li');
+            li.textContent = `${getränk.charAt(0).toUpperCase() + getränk.slice(1)} - ${menge} x €${getränkePreise[getränk].toFixed(2)} = €${preis.toFixed(2)}`;
+            warenkorbListe.appendChild(li);
+        }
     }
-  }
-  gesamtbetragElement.textContent = `Gesamtbetrag: €${gesamtbetrag.toFixed(2)}`;
 
-  // Modal anzeigen
-  const modal = document.getElementById('warenkorbModal');
-  modal.style.display = 'block';
+    if (gesamtbetrag === 0) {
+        alert('Bitte wähle mindestens ein Getränk aus.');
+        return;
+    }
+
+    gesamtbetragElement.textContent = `Gesamtbetrag: €${gesamtbetrag.toFixed(2)}`;
+
+    // Modal anzeigen
+    const modal = document.getElementById('warenkorbModal');
+    modal.style.display = 'block';
 }
+
+window.zumWarenkorb = zumWarenkorb;
 
 function modalSchließen() {
-  const modal = document.getElementById('warenkorbModal');
-  modal.style.display = 'none';
+    const modal = document.getElementById('warenkorbModal');
+    modal.style.display = 'none';
 }
 
-document.getElementById('bestellformular').addEventListener('submit', async function (e) {
-  e.preventDefault();
-  
-  const name = document.getElementById('name').value;
-  const tischnummer = document.getElementById('tischnummer').value;
+window.modalSchließen = modalSchließen;
 
-  for (const getränk in getränkePreise) {
-    const menge = parseInt(document.getElementById(getränk).value);
-    if (menge > 0) {
-      const preis = getränkePreise[getränk] * menge;
+async function bestellungAbschließen() {
+    const name = document.getElementById('name').value;
+    const tischnummer = document.getElementById('tischnummer').value;
 
-      try {
-        await addDoc(collection(db, 'bestellungen'), {
-          name: name,
-          tischnummer: tischnummer,
-          getränk: getränk,
-          menge: menge,
-          preis: preis,
-          status: 'eingegangen',
-          timestamp: serverTimestamp()
-        });
-      } catch (error) {
-        console.error('Fehler beim Aufgeben der Bestellung: ', error);
-      }
+    if (!name || !tischnummer) {
+        alert('Bitte gib deinen Namen und die Tischnummer an.');
+        modalSchließen();
+        return;
     }
-  }
 
-  alert('Bestellung erfolgreich aufgegeben!');
-  document.getElementById('bestellformular').[_{{{CITATION{{{_1{](https://github.com/primefaces/primereact/tree/4a676c58deb4e90977744cf5bb4600c02cee1f63/src%2Fshowcase%2Fliveeditor%2FLiveEditor.js)[_{{{CITATION{{{_2{](https://github.com/xandrman/bitrix-bootstrap-template/tree/5a36588688dc78ea78864e933f45e0e3c13be74a/header.php)[_{{{CITATION{{{_3{](https://github.com/hd-code/pandoc-docker/tree/07f83c6deeafbff1710c5f7992a97955c298ad61/example%2Fexample.md)[_{{{CITATION{{{_4{](https://github.com/AndreasHeine/opcua-sub-to-websocket/tree/b272dca8c8abf371e5e35f05ce93949bdb775723/README.md)
+    const bestellungen = [];
+    for (const getränk in getränkePreise) {
+        const menge = parseInt(document.getElementById(getränk).value);
+        if (menge > 0) {
+            const preis = getränkePreise[getränk] * menge;
+
+            bestellungen.push({
+                name: name,
+                tischnummer: tischnummer,
+                getränk: getränk,
+                menge: menge,
+                preis: preis,
+                status: 'eingegangen',
+                timestamp: serverTimestamp()
+            });
+        }
+    }
+
+    try {
+        // Schreiboperationen batchen
+        const batch = writeBatch(db);
+        bestellungen.forEach((bestellung) => {
+            const docRef = doc(collection(db, 'bestellungen'));
+            batch.set(docRef, bestellung);
+        });
+        await batch.commit();
+
+        alert('Bestellung erfolgreich aufgegeben!');
+        document.getElementById('bestellformular').reset();
+        modalSchließen();
+    } catch (error) {
+        console.error('Fehler beim Aufgeben der Bestellung: ', error);
+        alert('Es gab ein Problem mit deiner Bestellung. Bitte versuche es erneut.');
+    }
+}
+
+window.bestellungAbschließen = bestellungAbschließen;
