@@ -60,6 +60,7 @@ input, select {
     border-radius: 50%;
     cursor: pointer;
     padding: 0;
+    margin: 0 5px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -67,8 +68,10 @@ input, select {
 }
 
 
+
 .menge-steuerung input {
     width: 40px;
+	height: 30px;
     text-align: center;
     border: none;
     background: transparent;
@@ -96,6 +99,35 @@ button[type="button"] {
 button[type="button"]:hover {
     background-color: #45a049;
 }
+
+/* Styles für die Bestellübersicht */
+#bestellliste li {
+    background-color: #fff;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    list-style-type: none;
+    text-align: left;
+}
+
+#bestellliste button {
+    margin-right: 10px;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#bestellliste button:first-of-type {
+    background-color: #ff9800;
+    color: white;
+}
+
+#bestellliste button:last-of-type {
+    background-color: #4CAF50;
+    color: white;
+}
+
 
 .modal {
     display: none;

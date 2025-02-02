@@ -9,8 +9,11 @@
 <body>
     <h1>Getränkebestellung</h1>
     <form id="bestellformular">
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+		<label for="vorname">Vorname:</label>
+		<input type="text" id="vorname" name="vorname" required>	
+	
+		<label for="nachname">Nachname:</label>
+		<input type="text" id="nachname" name="nachname" required>
         
         <label for="tischnummer">Tischnummer:</label>
         <select id="tischnummer" name="tischnummer" required>
@@ -26,25 +29,25 @@
             <div class="getränk">
                 <span>Wasser - €1.00</span>
 				<div class="menge-steuerung">
-					<button type="button" onclick="anpassen('wasser', -1)">-</button>
+					<button type="button" onclick="anpassen('wasser', -1)">&#8722;</button>
 					<input type="number" id="wasser" name="wasser" value="0" readonly>
-					<button type="button" onclick="anpassen('wasser', 1)">+</button>
+					<button type="button" onclick="anpassen('wasser', 1)">&#43;</button>
 				</div>	
             </div>
             <div class="getränk">
                 <span>Cola - €2.50</span>
 				<div class="menge-steuerung">
-					<button type="button" onclick="anpassen('cola', -1)">-</button>
+					<button type="button" onclick="anpassen('cola', -1)">&#8722;</button>
 					<input type="number" id="cola" name="cola" value="0" readonly>
-					<button type="button" onclick="anpassen('cola', 1)">+</button>
+					<button type="button" onclick="anpassen('cola', 1)">&#43;</button>
 				</div>	
             </div>
             <div class="getränk">
                 <span>Bier - €3.00</span>
 				<div class="menge-steuerung">
-					<button type="button" onclick="anpassen('bier', -1)">-</button>
+					<button type="button" onclick="anpassen('bier', -1)">&#8722;</button>
 					<input type="number" id="bier" name="bier" value="0" readonly>
-					<button type="button" onclick="anpassen('bier', 1)">+</button>
+					<button type="button" onclick="anpassen('bier', 1)">&#43;</button>
 				</div>	
             </div>
             <!-- Weitere Getränke hier hinzufügen -->

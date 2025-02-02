@@ -19,7 +19,13 @@ const db = getFirestore(app);
 const bestellliste = document.getElementById('bestellliste');
 const zusammenfassung = document.getElementById('zusammenfassung');
 
-const q = query(collection(db, 'bestellungen'), orderBy('timestamp'));
+const q = query(
+    collection(db, 'bestellungen'),
+    orderBy('tischnummer'),
+    orderBy('nachname'),
+    orderBy('vorname'),
+    orderBy('timestamp')
+);
 
 onSnapshot(q, (snapshot) => {
     bestellliste.innerHTML = '';
@@ -29,7 +35,10 @@ onSnapshot(q, (snapshot) => {
         const li = document.createElement('li');
         li.id = `bestellung-${doc.id}`;
         li.innerHTML = `
-            Name: ${bestellung.name}, Tisch: ${bestellung.tischnummer}, Getränk: ${bestellung.getränk}, Menge: ${bestellung.menge}, Preis: €${bestellung.preis.toFixed(2)}, Status: ${bestellung.status}
+            Tisch: ${bestellung.tischnummer} <br>
+            Name: ${bestellung.vorname} ${bestellung.nachname} <br>
+            Getränk: ${bestellung.getränk}, Menge: ${bestellung.menge}, Preis: €${bestellung.preis.toFixed(2)}, Status: ${bestellung.status}
+            <br>
             <button onclick="updateStatus('${doc.id}', 'in Bearbeitung')">In Bearbeitung</button>
             <button onclick="updateStatus('${doc.id}', 'serviert')">Serviert</button>
         `;

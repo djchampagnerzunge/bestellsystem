@@ -74,11 +74,12 @@ function modalSchließen() {
 window.modalSchließen = modalSchließen;
 
 async function bestellungAbschließen() {
-    const name = document.getElementById('name').value;
+    const vorname = document.getElementById('vorname').value;
+    const nachname = document.getElementById('nachname').value;
     const tischnummer = document.getElementById('tischnummer').value;
 
-    if (!name || !tischnummer) {
-        alert('Bitte gib deinen Namen und die Tischnummer an.');
+    if (!vorname || !nachname || !tischnummer) {
+        alert('Bitte gib deinen Vornamen, Nachnamen und die Tischnummer an.');
         modalSchließen();
         return;
     }
@@ -90,8 +91,9 @@ async function bestellungAbschließen() {
             const preis = getränkePreise[getränk] * menge;
 
             bestellungen.push({
-                name: name,
-                tischnummer: tischnummer,
+				vorname: vorname,
+				nachname: nachname,
+				tischnummer: tischnummer,
                 getränk: getränk,
                 menge: menge,
                 preis: preis,
