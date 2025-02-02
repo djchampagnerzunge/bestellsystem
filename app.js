@@ -74,19 +74,25 @@ function modalSchließen() {
 window.modalSchließen = modalSchließen;
 
 async function bestellungAbschließen() {
-    const vorname = document.getElementById('vorname');
-    const nachname = document.getElementById('nachname');
-    const tischnummer = document.getElementById('tischnummer');
+    const vornameInput = document.getElementById('vorname');
+    const nachnameInput = document.getElementById('nachname');
+    const tischnummerInput = document.getElementById('tischnummer');
 
-    if (!vorname || !nachname || !tischnummer) {
+    if (!vornameInput || !nachnameInput || !tischnummerInput) {
         alert('Bitte gib deinen Vor- und Nachnamen sowie die Tischnummer an.');
         modalSchließen();
         return;
     }
 
+    const vorname = vornameInput.value.trim();
+    const nachname = nachnameInput.value.trim();
+    const tischnummer = tischnummerInput.value.trim();
 
-}
-
+    if (!vorname || !nachname || !tischnummer) {
+        alert('Bitte fülle alle Felder aus.');
+        modalSchließen();
+        return;
+    }
 
     const bestellungen = [];
     for (const getränk in getränkePreise) {
@@ -95,9 +101,9 @@ async function bestellungAbschließen() {
             const preis = getränkePreise[getränk] * menge;
 
             bestellungen.push({
-				vorname: vorname,
-				nachname: nachname,
-				tischnummer: tischnummer,
+                vorname: vorname,
+                nachname: nachname,
+                tischnummer: tischnummer,
                 getränk: getränk,
                 menge: menge,
                 preis: preis,
@@ -133,3 +139,4 @@ async function bestellungAbschließen() {
 }
 
 window.bestellungAbschließen = bestellungAbschließen;
+
