@@ -13,6 +13,7 @@ const firebaseConfig = {
 };
 
 // Firebase initialisieren (Firebase-Konfiguration einfügen)
+
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -35,6 +36,15 @@ onSnapshot(q, (snapshot) => {
         const bestellung = doc.data();
         const li = document.createElement('li');
         li.id = `bestellung-${doc.id}`;
+
+        // CSS-Klassen basierend auf dem Status zuweisen
+        if (bestellung.status === 'eingegangen') {
+            li.classList.add('status-eingegangen');
+        } else if (bestellung.status === 'in Bearbeitung') {
+            li.classList.add('status-in-bearbeitung');
+        } else if (bestellung.status === 'serviert') {
+            li.classList.add('status-serviert');
+        }
 
         // Getränke anzeigen (ohne Preise)
         let getränkeHTML = '';
@@ -110,6 +120,6 @@ window.updateStatus = async function (id, status) {
         });
         console.log('Status aktualisiert');
     } catch (error) {
-        console.error('Fehler beim Aktualisieren des Status: ', error);
+        console.error('Fehler beim Aktualisieren des Status:', error);
     }
 };

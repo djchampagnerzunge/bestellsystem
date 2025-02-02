@@ -129,6 +129,20 @@ input, select {
     color: white;
 }
 
+/* Farben für die Bestellstatus */
+.status-eingegangen {
+    background-color: #ffcccc; /* Pastelliges Rot */
+}
+
+.status-in-bearbeitung {
+    background-color: #ffe4b3; /* Pastelliges Orange */
+}
+
+.status-serviert {
+    background-color: #ccffcc; /* Pastelliges Grün */
+}
+
+
 .kunde-zusammenfassung {
     background-color: #fff;
     padding: 15px;
