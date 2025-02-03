@@ -149,6 +149,10 @@ onSnapshot(q, (snapshot) => {
 
 window.updateStatus = async function (id, status) {
     try {
+        const li = document.getElementById(`bestellung-${id}`);
+        if (status === 'in Bearbeitung' && erledigteBestellungen.contains(li)) {
+            bestellliste.appendChild(li);
+        }
         await updateDoc(doc(db, 'bestellungen', id), {
             status: status
         });
