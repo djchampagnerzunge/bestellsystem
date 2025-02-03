@@ -31,11 +31,7 @@ if (!erledigteBestellungen) {
     console.error("Element mit ID 'erledigteBestellungen' nicht gefunden.");
 }
 
-const q = query(
-    collection(db, 'bestellungen'),
-    orderBy('timestamp'),
-    orderBy('tischnummer')
-);
+const erledigteBestellungenSet = new Set(); // Verwende ein Set, um Duplikate zu vermeiden
 
 onSnapshot(q, (snapshot) => {
     if (bestellliste && zusammenfassung && erledigteBestellungen) {
@@ -86,11 +82,12 @@ onSnapshot(q, (snapshot) => {
 
             // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
             if (bestellung.status === 'serviert') {
-                setTimeout(() => {
-                    if (!erledigteBestellungen.contains(li)) {
+                if (!erledigteBestellungenSet.has(doc.id)) {
+                    erledigteBestellungenSet.add(doc.id);
+                    setTimeout(() => {
                         erledigteBestellungen.appendChild(li);
-                    }
-                }, 5000); // Warte 5 Sekunden bevor das Element verschoben wird
+                    }, 5000); // Warte 5 Sekunden bevor das Element verschoben wird
+                }
             } else {
                 bestellliste.appendChild(li);
             }
