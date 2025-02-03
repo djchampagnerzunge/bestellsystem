@@ -91,10 +91,15 @@ onSnapshot(q, (snapshot) => {
                 if (!erledigteBestellungenSet.has(doc.id)) {
                     erledigteBestellungenSet.add(doc.id);
                     setTimeout(() => {
-                        erledigteBestellungen.appendChild(li);
+                        if (!erledigteBestellungen.contains(li)) {
+                            erledigteBestellungen.appendChild(li);
+                        }
                     }, 5000); // Warte 5 Sekunden bevor das Element verschoben wird
                 }
             } else {
+                if (erledigteBestellungen.contains(li)) {
+                    erledigteBestellungen.removeChild(li);
+                }
                 bestellliste.appendChild(li);
             }
 
@@ -155,6 +160,7 @@ window.updateStatus = async function (id, status) {
         const li = document.getElementById(`bestellung-${id}`);
         if (status === 'in Bearbeitung' && erledigteBestellungen.contains(li)) {
             bestellliste.appendChild(li);
+            erledigteBestellungenSet.delete(id); // Entferne die ID aus dem Set
         }
         await updateDoc(doc(db, 'bestellungen', id), {
             status: status
