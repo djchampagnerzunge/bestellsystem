@@ -22,7 +22,7 @@ const getränkePreise = {
   wasser: 1.00,
   cola: 2.50,
   whiskyCola: 5.00,
-  ginTonic: 5.00,
+  ginTonic: 5.50,
   bier: 3.00
   // Weitere Getränke hier hinzufügen
 };
