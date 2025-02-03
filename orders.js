@@ -31,6 +31,12 @@ if (!erledigteBestellungen) {
     console.error("Element mit ID 'erledigteBestellungen' nicht gefunden.");
 }
 
+const q = query(
+    collection(db, 'bestellungen'),
+    orderBy('timestamp'),
+    orderBy('tischnummer')
+);
+
 const erledigteBestellungenSet = new Set(); // Verwende ein Set, um Duplikate zu vermeiden
 
 onSnapshot(q, (snapshot) => {
