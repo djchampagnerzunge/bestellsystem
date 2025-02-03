@@ -41,7 +41,6 @@ onSnapshot(q, (snapshot) => {
     if (bestellliste && zusammenfassung && erledigteBestellungen) {
         bestellliste.innerHTML = '';
         zusammenfassung.innerHTML = '';
-        erledigteBestellungen.innerHTML = ''; // Leeren der Liste für erledigte Bestellungen
 
         const zusammenfassungen = {}; // Für die Gesamtsummen pro Gast
         let bestellNummer = 1; // Initiale Bestellnummer
@@ -88,7 +87,9 @@ onSnapshot(q, (snapshot) => {
             // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
             if (bestellung.status === 'serviert') {
                 setTimeout(() => {
-                    erledigteBestellungen.appendChild(li);
+                    if (!erledigteBestellungen.contains(li)) {
+                        erledigteBestellungen.appendChild(li);
+                    }
                 }, 5000); // Warte 5 Sekunden bevor das Element verschoben wird
             } else {
                 bestellliste.appendChild(li);
@@ -156,4 +157,3 @@ window.updateStatus = async function (id, status) {
         console.error('Fehler beim Aktualisieren des Status:', error);
     }
 };
-
