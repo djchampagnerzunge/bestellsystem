@@ -12,24 +12,28 @@ const firebaseConfig = {
   measurementId: "G-4L916X16F7"
 };
 
+
 // Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 const bestellliste = document.getElementById('bestellliste');
 const zusammenfassung = document.getElementById('zusammenfassung');
+const erledigteBestellungen = document.getElementById('erledigteBestellungen'); // Hinzufügen der neuen Liste
 
 const q = query(
     collection(db, 'bestellungen'),
-    orderBy('tischnummer'),
-    orderBy('timestamp')
+    orderBy('timestamp'),
+    orderBy('tischnummer')
 );
 
 onSnapshot(q, (snapshot) => {
     bestellliste.innerHTML = '';
     zusammenfassung.innerHTML = '';
+    erledigteBestellungen.innerHTML = ''; // Leeren der Liste für erledigte Bestellungen
 
     const zusammenfassungen = {}; // Für die Gesamtsummen pro Gast
+    let bestellNummer = 1; // Initiale Bestellnummer
 
     snapshot.forEach((doc) => {
         const bestellung = doc.data();
@@ -46,6 +50,10 @@ onSnapshot(q, (snapshot) => {
             statusKlasse = 'serviert';
         }
 
+        // Konvertiere Timestamp zu einem lesbaren Format
+        const timestamp = bestellung.timestamp.toDate();
+        const timestampStr = timestamp.toLocaleDateString() + ' ' + timestamp.toLocaleTimeString();
+
         // Getränke anzeigen (ohne Preise)
         let getränkeHTML = '';
         bestellung.getränke.forEach((item) => {
@@ -53,6 +61,8 @@ onSnapshot(q, (snapshot) => {
         });
 
         li.innerHTML = `
+            <strong>Bestellnummer:</strong> ${bestellNummer++}<br>
+            <strong>Bestellzeit:</strong> ${timestampStr}<br>
             <strong>Tisch:</strong> ${bestellung.tischnummer}<br>
             <strong>Name:</strong> ${bestellung.vorname} ${bestellung.nachname}<br>
             <strong>Getränke:</strong><br>
@@ -63,7 +73,15 @@ onSnapshot(q, (snapshot) => {
             <button onclick="updateStatus('${doc.id}', 'serviert')">Serviert</button>
         `;
         li.classList.add(statusKlasse);
-        bestellliste.appendChild(li);
+
+        // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
+        if (bestellung.status === 'serviert') {
+            setTimeout(() => {
+                erledigteBestellungen.appendChild(li);
+            }, 5000);
+        } else {
+            bestellliste.appendChild(li);
+        }
 
         // Zusammenfassung vorbereiten
         const kundeName = `${bestellung.vorname} ${bestellung.nachname}`;
@@ -124,3 +142,4 @@ window.updateStatus = async function (id, status) {
         console.error('Fehler beim Aktualisieren des Status:', error);
     }
 };
+
