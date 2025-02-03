@@ -80,11 +80,10 @@ input, select {
     padding: 0;
     margin: 0 5px;
     outline: none;
-    -moz-appearance: textfield; /* Entfernt Pfeile in Firefox */
-    -webkit-appearance: none; /* Entfernt Pfeile in Chrome */
+    -moz-appearance: textfield;
+    -webkit-appearance: none;
 }
 
-/* Styles für die großen Buttons */
 .großer-button {
     width: 100%;
     padding: 15px;
@@ -101,7 +100,6 @@ input, select {
     background-color: #45a049;
 }
 
-/* Styles für die Bestellübersicht */
 #bestellliste li {
     background-color: #fff;
     padding: 15px;
@@ -109,6 +107,23 @@ input, select {
     border-radius: 8px;
     list-style-type: none;
     text-align: left;
+    border: 1px solid #ddd;
+}
+
+#bestellliste li.eingegangen {
+    background-color: #ffe6e6; /* pastellrot */
+}
+
+#bestellliste li.in-bearbeitung {
+    background-color: #ffedcc; /* pastellorange */
+}
+
+#bestellliste li.serviert {
+    background-color: #e6ffe6; /* pastellgrün */
+}
+
+#bestellliste li strong {
+    font-weight: bold;
 }
 
 #bestellliste button {
@@ -119,29 +134,9 @@ input, select {
     cursor: pointer;
 }
 
-#bestellliste button:first-of-type {
-    background-color: #ff9800;
-    color: white;
+#bestellliste button:hover {
+    opacity: 0.8;
 }
-
-#bestellliste button:last-of-type {
-    background-color: #4CAF50;
-    color: white;
-}
-
-/* Farben für die Bestellstatus */
-.status-eingegangen {
-    background-color: #ffcccc; /* Pastelliges Rot */
-}
-
-.status-in-bearbeitung {
-    background-color: #ffe4b3; /* Pastelliges Orange */
-}
-
-.status-serviert {
-    background-color: #ccffcc; /* Pastelliges Grün */
-}
-
 
 .kunde-zusammenfassung {
     background-color: #fff;

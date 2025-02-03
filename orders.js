@@ -12,8 +12,7 @@ const firebaseConfig = {
   measurementId: "G-4L916X16F7"
 };
 
-// Firebase initialisieren (Firebase-Konfiguration einfügen)
-
+// Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
@@ -37,13 +36,14 @@ onSnapshot(q, (snapshot) => {
         const li = document.createElement('li');
         li.id = `bestellung-${doc.id}`;
 
-        // CSS-Klassen basierend auf dem Status zuweisen
+        // Hinzufügen der CSS-Klasse basierend auf dem Status
+        let statusKlasse = '';
         if (bestellung.status === 'eingegangen') {
-            li.classList.add('status-eingegangen');
+            statusKlasse = 'eingegangen';
         } else if (bestellung.status === 'in Bearbeitung') {
-            li.classList.add('status-in-bearbeitung');
+            statusKlasse = 'in-bearbeitung';
         } else if (bestellung.status === 'serviert') {
-            li.classList.add('status-serviert');
+            statusKlasse = 'serviert';
         }
 
         // Getränke anzeigen (ohne Preise)
@@ -62,6 +62,7 @@ onSnapshot(q, (snapshot) => {
             <button onclick="updateStatus('${doc.id}', 'in Bearbeitung')">In Bearbeitung</button>
             <button onclick="updateStatus('${doc.id}', 'serviert')">Serviert</button>
         `;
+        li.classList.add(statusKlasse);
         bestellliste.appendChild(li);
 
         // Zusammenfassung vorbereiten
