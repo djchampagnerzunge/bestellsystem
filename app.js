@@ -49,7 +49,7 @@ const getränkePreise = {
   sektflasche: 22.00,
   tanquerayTonic: 8.80,
   moscowMule: 8.80,
-  aperolSpritz, 8.20,
+  aperolSpritz: 8.20,
   wildTurkeyCola: 8.50,
   wodkaMate: 8.50,
   cubaLibre: 8.80,
