@@ -32,11 +32,28 @@ input, select {
     box-sizing: border-box;
 }
 
+.getränkekategorie {
+    margin-top: 20px;
+}
+
+.getränkekategorie h2 {
+    background-color: #eaeaea;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: center;
+}
+
 .getränk {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-top: 15px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+}
+
+.getränk:last-child {
+    border-bottom: none;
 }
 
 .getränk span {

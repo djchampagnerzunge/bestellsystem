@@ -26,34 +26,65 @@
         
         <div id="getränkeliste">
             <label>Getränke:</label>
-            <div class="getränk">
-                <span>Wasser - €1.00</span>
-                <div class="menge-steuerung">
-                    <button type="button" onclick="anpassen('wasser', -1)">&#8722;</button>
-                    <input type="number" id="wasser" name="wasser" value="0" readonly>
-                    <button type="button" onclick="anpassen('wasser', 1)">&#43;</button>
-                </div>  
+            
+            <div class="getränkekategorie">
+                <h2>Softdrinks</h2>
+                <div class="getränk">
+                    <span>Wasser - €1.00</span>
+                    <div class="menge-steuerung">
+                        <button type="button" onclick="anpassen('wasser', -1)">&#8722;</button>
+                        <input type="number" id="wasser" name="wasser" value="0" readonly>
+                        <button type="button" onclick="anpassen('wasser', 1)">&#43;</button>
+                    </div>  
+                </div>
+                <div class="getränk">
+                    <span>Cola - €2.50</span>
+                    <div class="menge-steuerung">
+                        <button type="button" onclick="anpassen('cola', -1)">&#8722;</button>
+                        <input type="number" id="cola" name="cola" value="0" readonly>
+                        <button type="button" onclick="anpassen('cola', 1)">&#43;</button>
+                    </div>  
+                </div>
+                <!-- Weitere Softdrinks hinzufügen -->
             </div>
-            <div class="getränk">
-                <span>Cola - €2.50</span>
-                <div class="menge-steuerung">
-                    <button type="button" onclick="anpassen('cola', -1)">&#8722;</button>
-                    <input type="number" id="cola" name="cola" value="0" readonly>
-                    <button type="button" onclick="anpassen('cola', 1)">&#43;</button>
-                </div>  
+            
+            <div class="getränkekategorie">
+                <h2>Longdrinks</h2>
+                <div class="getränk">
+                    <span>Whisky Cola - €5.00</span>
+                    <div class="menge-steuerung">
+                        <button type="button" onclick="anpassen('whiskyCola', -1)">&#8722;</button>
+                        <input type="number" id="whiskyCola" name="whiskyCola" value="0" readonly>
+                        <button type="button" onclick="anpassen('whiskyCola', 1)">&#43;</button>
+                    </div>  
+                </div>
+                <div class="getränk">
+                    <span>Gin Tonic - €5.50</span>
+                    <div class="menge-steuerung">
+                        <button type="button" onclick="anpassen('ginTonic', -1)">&#8722;</button>
+                        <input type="number" id="ginTonic" name="ginTonic" value="0" readonly>
+                        <button type="button" onclick="anpassen('ginTonic', 1)">&#43;</button>
+                    </div>  
+                </div>
+                <!-- Weitere Longdrinks hinzufügen -->
             </div>
-            <div class="getränk">
-                <span>Bier - €3.00</span>
-                <div class="menge-steuerung">
-                    <button type="button" onclick="anpassen('bier', -1)">&#8722;</button>
-                    <input type="number" id="bier" name="bier" value="0" readonly>
-                    <button type="button" onclick="anpassen('bier', 1)">&#43;</button>
-                </div>  
+            
+            <div class="getränkekategorie">
+                <h2>Bier</h2>
+                <div class="getränk">
+                    <span>Bier - €3.00</span>
+                    <div class="menge-steuerung">
+                        <button type="button" onclick="anpassen('bier', -1)">&#8722;</button>
+                        <input type="number" id="bier" name="bier" value="0" readonly>
+                        <button type="button" onclick="anpassen('bier', 1)">&#43;</button>
+                    </div>  
+                </div>
+                <!-- Weitere Bier-Sorten hinzufügen -->
             </div>
-            <!-- Weitere Getränke hier hinzufügen -->
+            
+            <!-- Weitere Getränkekategorien hinzufügen -->
         </div>
 
-        <!-- Hier die Klasse "großer-button" hinzufügen -->
         <button type="button" class="großer-button" onclick="zumWarenkorb()">Zum Warenkorb</button>
     </form>
 
@@ -63,7 +94,6 @@
             <h2>Warenkorb</h2>
             <ul id="warenkorbListe"></ul>
             <p id="gesamtbetrag"></p>
-            <!-- Hier die Klasse "großer-button" hinzufügen -->
             <button type="button" class="großer-button" onclick="bestellungAbschließen()">Bestellung abschließen</button>
         </div>
     </div>
