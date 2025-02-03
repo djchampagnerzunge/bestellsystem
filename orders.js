@@ -11,7 +11,6 @@ const firebaseConfig = {
   appId: "1:777777220549:web:8d06d2a8ce3cb9794199ac",
   measurementId: "G-4L916X16F7"
 };
-
 // Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -43,8 +42,7 @@ onSnapshot(q, (snapshot) => {
     if (bestellliste && zusammenfassung && erledigteBestellungen) {
         bestellliste.innerHTML = '';
         zusammenfassung.innerHTML = '';
-        // entferne bestellIDs aus dem Set, da die Bestellung geändert wurde
-        erledigteBestellungenSet.clear(); 
+        erledigteBestellungen.innerHTML = ''; // Stelle sicher, dass die Liste zurückgesetzt wird
 
         const zusammenfassungen = {}; // Für die Gesamtsummen pro Gast
         let bestellNummer = 1; // Initiale Bestellnummer
@@ -90,8 +88,10 @@ onSnapshot(q, (snapshot) => {
 
             // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
             if (bestellung.status === 'serviert') {
-                erledigteBestellungenSet.add(doc.id);
-                erledigteBestellungen.appendChild(li);
+                if (!erledigteBestellungenSet.has(doc.id)) {
+                    erledigteBestellungenSet.add(doc.id);
+                    erledigteBestellungen.appendChild(li);
+                }
             } else {
                 erledigteBestellungenSet.delete(doc.id);
                 bestellliste.appendChild(li);
@@ -155,12 +155,17 @@ window.updateStatus = async function (id, status) {
     try {
         const li = document.getElementById(`bestellung-${id}`);
         if (status === 'in Bearbeitung' && erledigteBestellungen.contains(li)) {
+            erledigteBestellungen.removeChild(li);
             bestellliste.appendChild(li);
             erledigteBestellungenSet.delete(id); // Entferne die ID aus dem Set
+        } else if (status === 'serviert' && bestellliste.contains(li)) {
+            bestellliste.removeChild(li);
+            if (!erledigteBestellungen.contains(li)) {
+                erledigteBestellungen.appendChild(li);
+                erledigteBestellungenSet.add(id); // Füge die ID zum Set hinzu
+            }
         }
-        await updateDoc(doc(db, 'bestellungen', id), {
-            status: status
-        });
+        await updateDoc(doc(db, 'bestellungen', id), { status: status });
         console.log('Status aktualisiert');
     } catch (error) {
         console.error('Fehler beim Aktualisieren des Status:', error);
