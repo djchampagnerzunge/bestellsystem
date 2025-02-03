@@ -119,12 +119,14 @@ onSnapshot(q, (snapshot) => {
             });
         });
 
-        // Zusammenfassung der Bestellungen pro Gast
+        // Zusammenfassung der Bestellungen pro Gast alphabetisch sortieren
         const summaryTitle = document.createElement('h2');
         summaryTitle.textContent = 'Zusammenfassung der Bestellungen';
         zusammenfassung.appendChild(summaryTitle);
 
-        for (const kunde in zusammenfassungen) {
+        const sortedKunden = Object.keys(zusammenfassungen).sort();
+
+        sortedKunden.forEach(kunde => {
             const kundeData = zusammenfassungen[kunde];
             const div = document.createElement('div');
             div.classList.add('kunde-zusammenfassung');
@@ -143,7 +145,7 @@ onSnapshot(q, (snapshot) => {
                 <hr>
             `;
             zusammenfassung.appendChild(div);
-        }
+        });
     } else {
         console.error("Ein oder mehrere Elemente wurden nicht im DOM gefunden.");
     }
