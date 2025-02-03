@@ -43,6 +43,8 @@ onSnapshot(q, (snapshot) => {
     if (bestellliste && zusammenfassung && erledigteBestellungen) {
         bestellliste.innerHTML = '';
         zusammenfassung.innerHTML = '';
+        // entferne bestellIDs aus dem Set, da die Bestellung geändert wurde
+        erledigteBestellungenSet.clear(); 
 
         const zusammenfassungen = {}; // Für die Gesamtsummen pro Gast
         let bestellNummer = 1; // Initiale Bestellnummer
@@ -88,18 +90,10 @@ onSnapshot(q, (snapshot) => {
 
             // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
             if (bestellung.status === 'serviert') {
-                if (!erledigteBestellungenSet.has(doc.id)) {
-                    erledigteBestellungenSet.add(doc.id);
-                    setTimeout(() => {
-                        if (!erledigteBestellungen.contains(li)) {
-                            erledigteBestellungen.appendChild(li);
-                        }
-                    }, 5000); // Warte 5 Sekunden bevor das Element verschoben wird
-                }
+                erledigteBestellungenSet.add(doc.id);
+                erledigteBestellungen.appendChild(li);
             } else {
-                if (erledigteBestellungen.contains(li)) {
-                    erledigteBestellungen.removeChild(li);
-                }
+                erledigteBestellungenSet.delete(doc.id);
                 bestellliste.appendChild(li);
             }
 
