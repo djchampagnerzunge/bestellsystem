@@ -21,8 +21,8 @@ const db = getFirestore(app);
 const getränkePreise = {
   wasser: 1.00,
   cola: 2.50,
-  whisky cola: 5.00,
-  gin tonic: 5.00,
+  whiskyCola: 5.00,
+  ginTonic: 5.00,
   bier: 3.00
   // Weitere Getränke hier hinzufügen
 };
