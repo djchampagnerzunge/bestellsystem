@@ -72,6 +72,34 @@ const getränkePreise = {
   // Weitere Getränke hier hinzufügen
 };
 
+function getParameterByName(name) {
+  const url = window.location.href;
+  name = name.replace(/[\
+
+\[\\]
+
+]/g, '\\\\$&');
+  const regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)');
+  const results = regex.exec(url);
+  if (!results) return null;
+  if (!results[2]) return '';
+  return decodeURIComponent(results[2].replace(/\\+/g, ' '));
+}
+
+window.onload = function() {
+    const tischnummer = getParameterByName('tischnummer');
+    const gültigeTische = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17', '18']; // Füge hier alle deine gültigen Tischnummern ein
+
+    if (tischnummer && gültigeTische.includes(tischnummer)) {
+        const tischnummerInput = document.getElementById('tischnummer');
+        tischnummerInput.value = tischnummer;
+        tischnummerInput.disabled = true; // Deaktiviert das Feld, damit der Gast es nicht ändern kann
+    } else {
+        alert('Ungültige oder fehlende Tischnummer. Bitte scanne den QR-Code auf deinem Tisch.');
+        // Optional: Weiterleitung zu einer Fehlerseite oder Anzeige einer Meldung
+    }
+};
+
 function anpassen(id, wert) {
     const input = document.getElementById(id);
     if (!input) {

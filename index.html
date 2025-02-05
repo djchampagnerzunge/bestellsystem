@@ -15,14 +15,9 @@
         <label for="nachname">Nachname:</label>
         <input type="text" id="nachname" name="nachname" required>
         
-        <label for="tischnummer">Tischnummer:</label>
-        <select id="tischnummer" name="tischnummer" required>
-            <option value="" disabled selected>Wähle die Tischnummer</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <!-- Weitere Tischoptionen hinzufügen -->
-        </select>
+		<label for="tischnummer">Tischnummer:</label>
+		<input type="text" id="tischnummer" name="tischnummer" required readonly>
+
         
         <div id="getränkeliste">
             <label>Getränke:</label>
@@ -32,97 +27,97 @@
                 <div class="getränk">
                     <span>Fritz Zitrone - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzZitrone', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzZitrone', -1)">&#8722;</button>
                         <input type="number" id="fritzZitrone" name="fritzZitrone" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzZitrone', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzZitrone', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Fritz Orange - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzOrange', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzOrange', -1)">&#8722;</button>
                         <input type="number" id="fritzOrange" name="fritzOrange" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzOrange', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzOrange', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Fritz Apfel - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzApfel', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzApfel', -1)">&#8722;</button>
                         <input type="number" id="fritzApfel" name="fritzApfel" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzApfel', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzApfel', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Fritz Rhabarber - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzRhabarber', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzRhabarber', -1)">&#8722;</button>
                         <input type="number" id="fritzRhabarber" name="fritzRhabarber" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzRhabarber', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzRhabarber', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Fritz Melone - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzMelone', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzMelone', -1)">&#8722;</button>
                         <input type="number" id="fritzMelone" name="fritzMelone" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzMelone', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzMelone', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Fritz Kola - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzKola', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzKola', -1)">&#8722;</button>
                         <input type="number" id="fritzKola" name="fritzKola" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzKola', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzKola', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Fritz Kola zuckerfrei - €3.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('fritzKolaZuckerfrei', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('fritzKolaZuckerfrei', -1)">&#8722;</button>
                         <input type="number" id="fritzKolaZuckerfrei" name="fritzKolaZuckerfrei" value="0" readonly>
-                        <button type="button" onclick="anpassen('fritzKolaZuckerfrei', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('fritzKolaZuckerfrei', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Club Mate - €3.70</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('clubMate', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('clubMate', -1)">&#8722;</button>
                         <input type="number" id="clubMate" name="clubMate" value="0" readonly>
-                        <button type="button" onclick="anpassen('clubMate', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('clubMate', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Wasser laut klein - €2.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wasserLautKlein', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wasserLautKlein', -1)">&#8722;</button>
                         <input type="number" id="wasserLautKlein" name="wasserLautKlein" value="0" readonly>
-                        <button type="button" onclick="anpassen('wasserLautKlein', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wasserLautKlein', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Wasser leise klein - €2.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wasserLeiseKlein', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wasserLeiseKlein', -1)">&#8722;</button>
                         <input type="number" id="wasserLeiseKlein" name="wasserLeiseKlein" value="0" readonly>
-                        <button type="button" onclick="anpassen('wasserLeiseKlein', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wasserLeiseKlein', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Wasser laut groß - €4.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wasserLautGroß', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wasserLautGroß', -1)">&#8722;</button>
                         <input type="number" id="wasserLautGroß" name="wasserLautGroß" value="0" readonly>
-                        <button type="button" onclick="anpassen('wasserLautGroß', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wasserLautGroß', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Wasser leise groß - €4.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wasserLeiseGroß', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wasserLeiseGroß', -1)">&#8722;</button>
                         <input type="number" id="wasserLeiseGroß" name="wasserLeiseGroß" value="0" readonly>
-                        <button type="button" onclick="anpassen('wasserLeiseGroß', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wasserLeiseGroß', 1)">&#43;</button>
                     </div>  
                 </div>						
                 <!-- Weitere Softdrinks hinzufügen -->
@@ -133,49 +128,49 @@
                 <div class="getränk">
                     <span>Becks - €3.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('becks', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('becks', -1)">&#8722;</button>
                         <input type="number" id="becks" name="becks" value="0" readonly>
-                        <button type="button" onclick="anpassen('becks', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('becks', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Becks Blue - €3.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('becksBlue', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('becksBlue', -1)">&#8722;</button>
                         <input type="number" id="becksBlue" name="becksBlue" value="0" readonly>
-                        <button type="button" onclick="anpassen('becksBlue', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('becksBlue', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Astra - €2.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('astra', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('astra', -1)">&#8722;</button>
                         <input type="number" id="astra" name="astra" value="0" readonly>
-                        <button type="button" onclick="anpassen('astra', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('astra', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Alster - €2.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('alster', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('alster', -1)">&#8722;</button>
                         <input type="number" id="alster" name="alster" value="0" readonly>
-                        <button type="button" onclick="anpassen('alster', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('alster', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Weizen - €4.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('weizen', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('weizen', -1)">&#8722;</button>
                         <input type="number" id="weizen" name="weizen" value="0" readonly>
-                        <button type="button" onclick="anpassen('weizen', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('weizen', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Spaten - €4.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('spaten', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('spaten', -1)">&#8722;</button>
                         <input type="number" id="spaten" name="spaten" value="0" readonly>
-                        <button type="button" onclick="anpassen('spaten', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('spaten', 1)">&#43;</button>
                     </div>  
                 </div>					
                 <!-- Weitere Bier-Sorten hinzufügen -->
@@ -186,81 +181,81 @@
                 <div class="getränk">
                     <span>Riesling - €5.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('riesling', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('riesling', -1)">&#8722;</button>
                         <input type="number" id="riesling" name="riesling" value="0" readonly>
-                        <button type="button" onclick="anpassen('riesling', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('riesling', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Riesling Schorle - €5.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('rieslingSchorle', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('rieslingSchorle', -1)">&#8722;</button>
                         <input type="number" id="rieslingSchorle" name="rieslingSchorle" value="0" readonly>
-                        <button type="button" onclick="anpassen('rieslingSchorle', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('rieslingSchorle', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Grauburgunder - €7.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('grauburgunder', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('grauburgunder', -1)">&#8722;</button>
                         <input type="number" id="grauburgunder" name="grauburgunder" value="0" readonly>
-                        <button type="button" onclick="anpassen('grauburgunder', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('grauburgunder', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Grauburgunder Schorle - €5.60</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('grauburgunderSchorle', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('grauburgunderSchorle', -1)">&#8722;</button>
                         <input type="number" id="grauburgunderSchorle" name="grauburgunderSchorle" value="0" readonly>
-                        <button type="button" onclick="anpassen('grauburgunderSchorle', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('grauburgunderSchorle', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Merlot - €6.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('merlot', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('merlot', -1)">&#8722;</button>
                         <input type="number" id="merlot" name="merlot" value="0" readonly>
-                        <button type="button" onclick="anpassen('merlot', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('merlot', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Prosecco - €3.90</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('prosecco', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('prosecco', -1)">&#8722;</button>
                         <input type="number" id="prosecco" name="prosecco" value="0" readonly>
-                        <button type="button" onclick="anpassen('prosecco', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('prosecco', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Prosecco auf Eis - €6.30</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('proseccoAufEis', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('proseccoAufEis', -1)">&#8722;</button>
                         <input type="number" id="proseccoAufEis" name="proseccoAufEis" value="0" readonly>
-                        <button type="button" onclick="anpassen('proseccoAufEis', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('proseccoAufEis', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Mimosa - €3.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('mimosa', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('mimosa', -1)">&#8722;</button>
                         <input type="number" id="mimosa" name="mimosa" value="0" readonly>
-                        <button type="button" onclick="anpassen('mimosa', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('mimosa', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Sekt Mate - €7.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('sektMate', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('sektMate', -1)">&#8722;</button>
                         <input type="number" id="sektMate" name="sektMate" value="0" readonly>
-                        <button type="button" onclick="anpassen('sektMate', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('sektMate', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Sektflasche - €22.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('sektflasche', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('sektflasche', -1)">&#8722;</button>
                         <input type="number" id="sektflasche" name="sektflasche" value="0" readonly>
-                        <button type="button" onclick="anpassen('sektflasche', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('sektflasche', 1)">&#43;</button>
                     </div>  
                 </div>		
             </div>            
@@ -269,89 +264,89 @@
                 <div class="getränk">
                     <span>Tanqueray Tonic - €8.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('tanquerayTonic', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('tanquerayTonic', -1)">&#8722;</button>
                         <input type="number" id="tanquerayTonic" name="tanquerayTonic" value="0" readonly>
-                        <button type="button" onclick="anpassen('tanquerayTonic', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('tanquerayTonic', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Moscow Mule - €8.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('moscowMule', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('moscowMule', -1)">&#8722;</button>
                         <input type="number" id="moscowMule" name="moscowMule" value="0" readonly>
-                        <button type="button" onclick="anpassen('moscowMule', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('moscowMule', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Aperol Spritz - €8.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('aperolSpritz', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('aperolSpritz', -1)">&#8722;</button>
                         <input type="number" id="aperolSpritz" name="aperolSpritz" value="0" readonly>
-                        <button type="button" onclick="anpassen('aperolSpritz', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('aperolSpritz', 1)">&#43;</button>
                     </div>  
                 </div>			
                 <div class="getränk">
                     <span>Wild Turkey Cola - €8.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wildTurkeyCola', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wildTurkeyCola', -1)">&#8722;</button>
                         <input type="number" id="wildTurkeyCola" name="wildTurkeyCola" value="0" readonly>
-                        <button type="button" onclick="anpassen('wildTurkeyCola', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wildTurkeyCola', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Wodka Mate - €8.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wodkaMate', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wodkaMate', -1)">&#8722;</button>
                         <input type="number" id="wodkaMate" name="wodkaMate" value="0" readonly>
-                        <button type="button" onclick="anpassen('wodkaMate', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wodkaMate', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Cuba Libre - €8.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('cubaLibre', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('cubaLibre', -1)">&#8722;</button>
                         <input type="number" id="cubaLibre" name="cubaLibre" value="0" readonly>
-                        <button type="button" onclick="anpassen('cubaLibre', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('cubaLibre', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Dark'n'Stormy - €8.80</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('darkNStormy', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('darkNStormy', -1)">&#8722;</button>
                         <input type="number" id="darkNStormy" name="darkNStormy" value="0" readonly>
-                        <button type="button" onclick="anpassen('darkNStormy', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('darkNStormy', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Caipirinha - €9.30</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('caipirinha', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('caipirinha', -1)">&#8722;</button>
                         <input type="number" id="caipirinha" name="caipirinha" value="0" readonly>
-                        <button type="button" onclick="anpassen('caipirinha', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('caipirinha', 1)">&#43;</button>
                     </div>  
                 </div>	
                 <div class="getränk">
                     <span>Mojito - €9.30</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('mojito', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('mojito', -1)">&#8722;</button>
                         <input type="number" id="mojito" name="mojito" value="0" readonly>
-                        <button type="button" onclick="anpassen('mojito', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('mojito', 1)">&#43;</button>
                     </div>  
                 </div>
                 <div class="getränk">
                     <span>Hugo - €8.20</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('hugo', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('hugo', -1)">&#8722;</button>
                         <input type="number" id="hugo" name="hugo" value="0" readonly>
-                        <button type="button" onclick="anpassen('hugo', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('hugo', 1)">&#43;</button>
                     </div>  
                 </div>		
                 <div class="getränk">
                     <span>Cocktail alkoholfrei - €6.30</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('cocktailAlkoholfrei', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('cocktailAlkoholfrei', -1)">&#8722;</button>
                         <input type="number" id="cocktailAlkoholfrei" name="cocktailAlkoholfrei" value="0" readonly>
-                        <button type="button" onclick="anpassen('cocktailAlkoholfrei', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('cocktailAlkoholfrei', 1)">&#43;</button>
                     </div>  
                 </div>						
                 <!-- Weitere Longdrinks hinzufügen -->    
@@ -361,65 +356,65 @@
                 <div class="getränk">
                     <span>Jägermeister - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('jägermeister', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('jägermeister', -1)">&#8722;</button>
                         <input type="number" id="jägermeister" name="jägermeister" value="0" readonly>
-                        <button type="button" onclick="anpassen('jägermeister', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('jägermeister', 1)">&#43;</button>
                     </div>  
                 </div>    
                 <div class="getränk">
                     <span>Wodka - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wodka', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wodka', -1)">&#8722;</button>
                         <input type="number" id="wodka" name="wodka" value="0" readonly>
-                        <button type="button" onclick="anpassen('wodka', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wodka', 1)">&#43;</button>
                     </div>  
                 </div>  	
                 <div class="getränk">
                     <span>Helbing - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('helbing', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('helbing', -1)">&#8722;</button>
                         <input type="number" id="helbing" name="helbing" value="0" readonly>
-                        <button type="button" onclick="anpassen('helbing', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('helbing', 1)">&#43;</button>
                     </div>  
                 </div>  	
                 <div class="getränk">
                     <span>Pfeffi - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('pfeffi', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('pfeffi', -1)">&#8722;</button>
                         <input type="number" id="pfeffi" name="pfeffi" value="0" readonly>
-                        <button type="button" onclick="anpassen('pfeffi', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('pfeffi', 1)">&#43;</button>
                     </div>  
                 </div>  
                 <div class="getränk">
                     <span>Frangelico - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('frangelico', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('frangelico', -1)">&#8722;</button>
                         <input type="number" id="frangelico" name="frangelico" value="0" readonly>
-                        <button type="button" onclick="anpassen('frangelico', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('frangelico', 1)">&#43;</button>
                     </div>  
                 </div>  	
                 <div class="getränk">
                     <span>Wild Turkey - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('wildTurkey', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('wildTurkey', -1)">&#8722;</button>
                         <input type="number" id="wildTurkey" name="wildTurkey" value="0" readonly>
-                        <button type="button" onclick="anpassen('wildTurkey', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('wildTurkey', 1)">&#43;</button>
                     </div>  
                 </div>  
                 <div class="getränk">
                     <span>Averna - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('averna', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('averna', -1)">&#8722;</button>
                         <input type="number" id="averna" name="averna" value="0" readonly>
-                        <button type="button" onclick="anpassen('averna', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('averna', 1)">&#43;</button>
                     </div>  
                 </div>  
                 <div class="getränk">
                     <span>Mexikaner - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('mexikaner', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('mexikaner', -1)">&#8722;</button>
                         <input type="number" id="mexikaner" name="mexikaner" value="0" readonly>
-                        <button type="button" onclick="anpassen('mexikaner', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('mexikaner', 1)">&#43;</button>
                     </div>  
                 </div>  				
 			</div>
@@ -429,25 +424,25 @@
                 <div class="getränk">
                     <span>Café Crema - €3.00</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('cafeCrema', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('cafeCrema', -1)">&#8722;</button>
                         <input type="number" id="cafeCrema" name="cafeCrema" value="0" readonly>
-                        <button type="button" onclick="anpassen('cafeCrema', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('cafeCrema', 1)">&#43;</button>
                     </div>  
                 </div> 
                 <div class="getränk">
                     <span>Cappuccino - €3.40</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('cappuccino', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('cappuccino', -1)">&#8722;</button>
                         <input type="number" id="cappuccino" name="cappuccino" value="0" readonly>
-                        <button type="button" onclick="anpassen('cappuccino', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('cappuccino', 1)">&#43;</button>
                     </div>  
                 </div> 
                 <div class="getränk">
                     <span>Espresso - €2.50</span>
                     <div class="menge-steuerung">
-                        <button type="button" onclick="anpassen('espresso', -1)">&#8722;</button>
+                        <button type="button" class="minus" onclick="anpassen('espresso', -1)">&#8722;</button>
                         <input type="number" id="espresso" name="espresso" value="0" readonly>
-                        <button type="button" onclick="anpassen('espresso', 1)">&#43;</button>
+                        <button type="button" class="plus" onclick="anpassen('espresso', 1)">&#43;</button>
                     </div>  
                 </div> 						
 			</div>	

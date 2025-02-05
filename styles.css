@@ -70,8 +70,6 @@ input, select {
     width: 30px;
     height: 30px;
     font-size: 20px;
-    background-color: #4CAF50;
-    color: white;
     border: none;
     border-radius: 50%;
     cursor: pointer;
@@ -83,9 +81,24 @@ input, select {
     line-height: 1;
 }
 
-.menge-steuerung button:hover {
-    background-color: #45a049;
+.menge-steuerung button.minus {
+    background-color: #f44336; /* rot */
+    color: white;
 }
+
+.menge-steuerung button.plus {
+    background-color: #4CAF50; /* grün */
+    color: white;
+}
+
+.menge-steuerung button.minus:hover {
+    background-color: #e53935; /* dunkleres rot beim Hover */
+}
+
+.menge-steuerung button.plus:hover {
+    background-color: #45a049; /* dunkleres grün beim Hover */
+}
+
 
 .menge-steuerung input {
     width: 40px;
