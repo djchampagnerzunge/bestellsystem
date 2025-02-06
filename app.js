@@ -202,6 +202,8 @@ async function bestellungAbschließen() {
         alert('Bestellung erfolgreich aufgegeben!');
         document.getElementById('bestellformular').reset();
         modalSchließen();
+		
+		window.location.href = window.location.href.split('?')[0] + '?tischnummer=' + encodeURIComponent(tischnummer);
     } catch (error) {
         console.error('Fehler beim Aufgeben der Bestellung:', error);
         alert('Es gab ein Problem mit deiner Bestellung. Bitte versuche es erneut.');
