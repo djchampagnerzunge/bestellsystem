@@ -147,6 +147,9 @@ function modalSchließen() {
 window.modalSchließen = modalSchließen;
 
 async function bestellungAbschließen() {
+    const bestellButton = document.getElementById('bestellButton');
+    bestellButton.disabled = true; // Button deaktivieren
+
     const vornameInput = document.getElementById('vorname');
     const nachnameInput = document.getElementById('nachname');
     const tischnummerInput = document.getElementById('tischnummer');
@@ -154,6 +157,7 @@ async function bestellungAbschließen() {
     if (!vornameInput || !nachnameInput || !tischnummerInput) {
         alert('Bitte gib deinen Vor- und Nachnamen sowie die Tischnummer an.');
         modalSchließen();
+        bestellButton.disabled = false; // Button wieder aktivieren
         return;
     }
 
@@ -164,6 +168,7 @@ async function bestellungAbschließen() {
     if (!vorname || !nachname || !tischnummer) {
         alert('Bitte fülle alle Felder aus.');
         modalSchließen();
+        bestellButton.disabled = false; // Button wieder aktivieren
         return;
     }
 
@@ -187,6 +192,7 @@ async function bestellungAbschließen() {
     if (getraenkeListe.length === 0) {
         alert('Bitte wähle mindestens ein Getränk aus.');
         modalSchließen();
+        bestellButton.disabled = false; // Button wieder aktivieren
         return;
     }
 
@@ -204,11 +210,11 @@ async function bestellungAbschließen() {
         alert('Bestellung erfolgreich aufgegeben!');
         document.getElementById('bestellformular').reset();
         modalSchließen();
-		
-		window.location.href = window.location.href.split('?')[0] + '?tischnummer=' + encodeURIComponent(tischnummer);
+        window.location.reload(); // Seite neu laden, um Tischnummer wieder einzutragen
     } catch (error) {
         console.error('Fehler beim Aufgeben der Bestellung:', error);
         alert('Es gab ein Problem mit deiner Bestellung. Bitte versuche es erneut.');
+        bestellButton.disabled = false; // Button wieder aktivieren im Fehlerfall
     }
 }
 
