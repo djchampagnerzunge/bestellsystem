@@ -32,18 +32,18 @@ input, select {
     box-sizing: border-box;
 }
 
-.getränkekategorie {
+.getraenkekategorie {
     margin-top: 20px;
 }
 
-.getränkekategorie h2 {
+.getraenkekategorie h2 {
     background-color: #eaeaea;
     padding: 10px;
     border-radius: 8px;
     text-align: center;
 }
 
-.getränk {
+.getraenk {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -52,11 +52,11 @@ input, select {
     padding-bottom: 10px;
 }
 
-.getränk:last-child {
+.getraenk:last-child {
     border-bottom: none;
 }
 
-.getränk span {
+.getraenk span {
     flex: 1;
     text-align: left;
 }

@@ -66,9 +66,9 @@ onSnapshot(q, (snapshot) => {
             const timestampStr = timestamp.toLocaleDateString() + ' ' + timestamp.toLocaleTimeString();
 
             // Getränke anzeigen (ohne Preise)
-            let getränkeHTML = '';
-            bestellung.getränke.forEach((item) => {
-                getränkeHTML += `${item.getränk.charAt(0).toUpperCase() + item.getränk.slice(1)} x${item.menge}<br>`;
+            let getraenkeHTML = '';
+            bestellung.getraenke.forEach((item) => {
+                getraenkeHTML += `${item.getraenk.charAt(0).toUpperCase() + item.getraenk.slice(1)} x${item.menge}<br>`;
             });
 
             li.innerHTML = `
@@ -76,8 +76,8 @@ onSnapshot(q, (snapshot) => {
                 <strong>Bestellzeit:</strong> ${timestampStr}<br>
                 <strong>Tisch:</strong> ${bestellung.tischnummer}<br>
                 <strong>Name:</strong> ${bestellung.vorname} ${bestellung.nachname}<br>
-                <strong>Getränke:</strong><br>
-                ${getränkeHTML}
+                <strong>Getraenke:</strong><br>
+                ${getraenkeHTML}
                 <strong>Status:</strong> ${bestellung.status}
                 <br>
                 <button onclick="updateStatus('${doc.id}', 'in Bearbeitung')">In Bearbeitung</button>
@@ -98,16 +98,16 @@ onSnapshot(q, (snapshot) => {
                 zusammenfassungen[kundeName] = {
                     tischnummer: bestellung.tischnummer,
                     gesamtpreis: 0,
-                    getränkeDetails: []
+                    getraenkeDetails: []
                 };
             }
 
             zusammenfassungen[kundeName].gesamtpreis += bestellung.gesamtpreis;
 
             // Getränke mit Preisen hinzufügen
-            bestellung.getränke.forEach((item) => {
-                zusammenfassungen[kundeName].getränkeDetails.push({
-                    getränk: item.getränk,
+            bestellung.getraenke.forEach((item) => {
+                zusammenfassungen[kundeName].getraenkeDetails.push({
+                    getraenk: item.getraenk,
                     menge: item.menge,
                     preis: item.preis
                 });
@@ -126,16 +126,16 @@ onSnapshot(q, (snapshot) => {
             const div = document.createElement('div');
             div.classList.add('kunde-zusammenfassung');
 
-            let getränkeDetailsHTML = '';
-            kundeData.getränkeDetails.forEach((item) => {
-                getränkeDetailsHTML += `${item.getränk.charAt(0).toUpperCase() + item.getränk.slice(1)} x${item.menge} - €${item.preis.toFixed(2)}<br>`;
+            let getraenkeDetailsHTML = '';
+            kundeData.getraenkeDetails.forEach((item) => {
+                getraenkeDetailsHTML += `${item.getraenk.charAt(0).toUpperCase() + item.getraenk.slice(1)} x${item.menge} - €${item.preis.toFixed(2)}<br>`;
             });
 
             div.innerHTML = `
                 <strong>Name:</strong> ${kunde} <br>
                 <strong>Tischnummer:</strong> ${kundeData.tischnummer} <br>
-                <strong>Getränke:</strong><br>
-                ${getränkeDetailsHTML}
+                <strong>Getraenke:</strong><br>
+                ${getraenkeDetailsHTML}
                 <strong>Gesamtbetrag:</strong> €${kundeData.gesamtpreis.toFixed(2)}
                 <hr>
             `;

@@ -18,7 +18,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
-const getränkePreise = {
+const getraenkePreise = {
   fritzZitrone: 3.20,
   fritzOrange: 3.20,
   fritzApfel: 3.20,
@@ -114,14 +114,14 @@ function zumWarenkorb() {
     let gesamtbetrag = 0;
     warenkorbListe.innerHTML = '';
 
-    for (const getränk in getränkePreise) {
-        const menge = parseInt(document.getElementById(getränk).value);
+    for (const getraenk in getraenkePreise) {
+        const menge = parseInt(document.getElementById(getraenk).value);
         if (menge > 0) {
-            const preis = getränkePreise[getränk] * menge;
+            const preis = getraenkePreise[getraenk] * menge;
             gesamtbetrag += preis;
 
             const li = document.createElement('li');
-            li.textContent = `${getränk.charAt(0).toUpperCase() + getränk.slice(1)} - ${menge} x €${getränkePreise[getränk].toFixed(2)} = €${preis.toFixed(2)}`;
+            li.textContent = `${getraenk.charAt(0).toUpperCase() + getraenk.slice(1)} - ${menge} x €${getraenkePreise[getraenk].toFixed(2)} = €${preis.toFixed(2)}`;
             warenkorbListe.appendChild(li);
         }
     }
@@ -168,24 +168,24 @@ async function bestellungAbschließen() {
         return;
     }
 
-    const getränkeListe = [];
+    const getraenkeListe = [];
     let gesamtpreis = 0;
 
-    for (const getränk in getränkePreise) {
-        const menge = parseInt(document.getElementById(getränk).value);
+    for (const getraenk in getraenkePreise) {
+        const menge = parseInt(document.getElementById(getraenk).value);
         if (menge > 0) {
-            const preis = getränkePreise[getränk] * menge;
+            const preis = getraenkePreise[getraenk] * menge;
             gesamtpreis += preis;
 
-            getränkeListe.push({
-                getränk: getränk,
+            getraenkeListe.push({
+                getraenk: getraenk,
                 menge: menge,
                 preis: preis
             });
         }
     }
 
-    if (getränkeListe.length === 0) {
+    if (getraenkeListe.length === 0) {
         alert('Bitte wähle mindestens ein Getränk aus.');
         modalSchließen();
         return;
@@ -196,7 +196,7 @@ async function bestellungAbschließen() {
             vorname: vorname,
             nachname: nachname,
             tischnummer: tischnummer,
-            getränke: getränkeListe,
+            getraenke: getraenkeListe,
             gesamtpreis: gesamtpreis,
             status: 'eingegangen',
             timestamp: serverTimestamp()
