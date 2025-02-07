@@ -1,5 +1,7 @@
 import { initializeApp } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-app.js";
 import { getFirestore, collection, query, orderBy, onSnapshot, doc, updateDoc } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-firestore.js";
+import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.2.0/firebase-auth.js";
+
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,6 +17,16 @@ const firebaseConfig = {
 // Firebase initialisieren
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
+const auth = getAuth(app);
+
+// Anonym anmelden
+signInAnonymously(auth)
+  .then(() => {
+    console.log('Anonym angemeldet');
+  })
+  .catch((error) => {
+    console.error('Fehler bei der anonymen Anmeldung:', error);
+  });
 
 const bestellliste = document.getElementById('bestellliste');
 const zusammenfassung = document.getElementById('zusammenfassung');
@@ -152,5 +164,10 @@ window.updateStatus = async function (id, status) {
         console.log('Status aktualisiert');
     } catch (error) {
         console.error('Fehler beim Aktualisieren des Status:', error);
+        // Handhabe spezielle Fehlercodes
+        if (error.code === 'permission-denied') {
+            alert('Fehler: Fehlende oder unzureichende Berechtigungen. Bitte überprüfe die Firebase-Sicherheitsregeln.');
+        }
     }
 };
+
