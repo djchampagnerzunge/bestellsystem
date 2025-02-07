@@ -176,6 +176,11 @@ input, select {
     border: 1px solid #ddd;
 }
 
+.kunde-zusammenfassung.bezahlt {
+    background-color: #d4edda; /* pastellgrün */
+}
+
+
 .kunde-zusammenfassung strong {
     font-weight: bold;
 }

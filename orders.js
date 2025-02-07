@@ -21,17 +21,6 @@ const bestellliste = document.getElementById('bestellliste');
 const zusammenfassung = document.getElementById('zusammenfassung');
 const erledigteBestellungen = document.getElementById('erledigteBestellungen');
 
-// Überprüfe, ob die Elemente existieren
-if (!bestellliste) {
-    console.error("Element mit ID 'bestellliste' nicht gefunden.");
-}
-if (!zusammenfassung) {
-    console.error("Element mit ID 'zusammenfassung' nicht gefunden.");
-}
-if (!erledigteBestellungen) {
-    console.error("Element mit ID 'erledigteBestellungen' nicht gefunden.");
-}
-
 const q = query(
     collection(db, 'bestellungen'),
     orderBy('timestamp'),
@@ -60,6 +49,8 @@ onSnapshot(q, (snapshot) => {
                 statusKlasse = 'in-bearbeitung';
             } else if (bestellung.status === 'serviert') {
                 statusKlasse = 'serviert';
+            } else if (bestellung.status === 'bezahlt') {
+                statusKlasse = 'bezahlt';
             }
 
             // Konvertiere Timestamp zu einem lesbaren Format
@@ -77,7 +68,7 @@ onSnapshot(q, (snapshot) => {
                 <strong>Bestellzeit:</strong> ${timestampStr}<br>
                 <strong>Tisch:</strong> ${bestellung.tischnummer}<br>
                 <strong>Name:</strong> ${bestellung.vorname} ${bestellung.nachname}<br>
-                <strong>Getraenke:</strong><br>
+                <strong>Getränke:</strong><br>
                 ${getraenkeHTML}
                 <strong>Status:</strong> ${bestellung.status}
                 <br>
@@ -87,7 +78,7 @@ onSnapshot(q, (snapshot) => {
             li.classList.add(statusKlasse);
 
             // Füge Bestellung der Liste hinzu oder verschiebe sie zu den erledigten Bestellungen
-            if (bestellung.status === 'serviert') {
+            if (bestellung.status === 'serviert' || bestellung.status === 'bezahlt') {
                 erledigteBestellungen.appendChild(li);
             } else {
                 bestellliste.appendChild(li);
@@ -99,7 +90,8 @@ onSnapshot(q, (snapshot) => {
                 zusammenfassungen[kundeName] = {
                     tischnummer: bestellung.tischnummer,
                     gesamtpreis: 0,
-                    getraenkeDetails: []
+                    getraenkeDetails: [],
+                    bezahlt: false // Initial als nicht bezahlt markieren
                 };
             }
 
@@ -135,9 +127,13 @@ onSnapshot(q, (snapshot) => {
             div.innerHTML = `
                 <strong>Name:</strong> ${kunde} <br>
                 <strong>Tischnummer:</strong> ${kundeData.tischnummer} <br>
-                <strong>Getraenke:</strong><br>
+                <strong>Getränke:</strong><br>
                 ${getraenkeDetailsHTML}
                 <strong>Gesamtbetrag:</strong> €${kundeData.gesamtpreis.toFixed(2)}
+                <label>
+                    <input type="checkbox" onchange="togglePaymentStatus(this)">
+                    Bezahlt
+                </label>
                 <hr>
             `;
             zusammenfassung.appendChild(div);
@@ -153,6 +149,12 @@ window.updateStatus = async function (id, status) {
         console.log('Status aktualisiert');
     } catch (error) {
         console.error('Fehler beim Aktualisieren des Status:', error);
+        if (error.code === 'permission-denied') {
+            alert('Fehler: Fehlende oder unzureichende Berechtigungen. Bitte überprüfe die Firebase-Sicherheitsregeln.');
+        }
     }
 };
 
+window.togglePaymentStatus = function (checkbox) {
+    checkbox.parentElement.parentElement.classList.toggle('bezahlt', checkbox.checked);
+};
