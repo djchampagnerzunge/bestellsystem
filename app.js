@@ -69,7 +69,9 @@ const getränkePreise = {
   cafeCrema: 3.00,
   cappuccinoKuhmilch: 3.40,
   cappuccinoHafermilch: 3.40,
-  espresso: 2.50
+  espresso: 2.50,
+  frischerIngwertee: 3.50,
+  frischerPfefferminztee: 3.50
   // Weitere Getränke hier hinzufügen
 };
 
