@@ -67,7 +67,8 @@ const getränkePreise = {
   averna: 3.00,
   mexikaner: 3.00,
   cafeCrema: 3.00,
-  cappuccino: 3.40,
+  cappuccinoKuhmilch: 3.40,
+  cappuccinoHafermilch: 3.40,
   espresso: 2.50
   // Weitere Getränke hier hinzufügen
 };
